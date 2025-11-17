@@ -27,7 +27,10 @@ enum CorRGB {
     Verde = 1,
     Azul = 2,
     Branco = 3,
-    Apagado = 4
+    Apagado = 4,
+    Amarelo = 5,
+    Roxo = 6,
+    Ciano = 7
 }
 
 // Equipe / cor do time (para feedback visual)
@@ -380,15 +383,39 @@ namespace RoboBatalha {
         setPwm(8, 0, 0)
 
         function aplicaLadoEsquerdo(c: CorRGB) {
-            if (c == CorRGB.Vermelho || c == CorRGB.Branco) setPwm(9, 0, brilhoRGB)
-            if (c == CorRGB.Verde || c == CorRGB.Branco) setPwm(10, 0, brilhoRGB)
-            if (c == CorRGB.Azul || c == CorRGB.Branco) setPwm(11, 0, brilhoRGB)
+            // Vermelho puro ou presente na mistura (vermelho, branco, amarelo, roxo)
+            if (c == CorRGB.Vermelho || c == CorRGB.Branco ||
+                c == CorRGB.Amarelo || c == CorRGB.Roxo) {
+                setPwm(9, 0, brilhoRGB)
+            }
+            // Verde puro ou presente na mistura (verde, branco, amarelo, ciano)
+            if (c == CorRGB.Verde || c == CorRGB.Branco ||
+                c == CorRGB.Amarelo || c == CorRGB.Ciano) {
+                setPwm(10, 0, brilhoRGB)
+            }
+            // Azul puro ou presente na mistura (azul, branco, roxo, ciano)
+            if (c == CorRGB.Azul || c == CorRGB.Branco ||
+                c == CorRGB.Roxo || c == CorRGB.Ciano) {
+                setPwm(11, 0, brilhoRGB)
+            }
         }
 
         function aplicaLadoDireito(c: CorRGB) {
-            if (c == CorRGB.Vermelho || c == CorRGB.Branco) setPwm(7, 0, brilhoRGB)
-            if (c == CorRGB.Verde || c == CorRGB.Branco) setPwm(6, 0, brilhoRGB)
-            if (c == CorRGB.Azul || c == CorRGB.Branco) setPwm(8, 0, brilhoRGB)
+            // Vermelho puro ou presente na mistura
+            if (c == CorRGB.Vermelho || c == CorRGB.Branco ||
+                c == CorRGB.Amarelo || c == CorRGB.Roxo) {
+                setPwm(7, 0, brilhoRGB)
+            }
+            // Verde puro ou presente na mistura
+            if (c == CorRGB.Verde || c == CorRGB.Branco ||
+                c == CorRGB.Amarelo || c == CorRGB.Ciano) {
+                setPwm(6, 0, brilhoRGB)
+            }
+            // Azul puro ou presente na mistura
+            if (c == CorRGB.Azul || c == CorRGB.Branco ||
+                c == CorRGB.Roxo || c == CorRGB.Ciano) {
+                setPwm(8, 0, brilhoRGB)
+            }
         }
 
         if (lado == LadoRGB.Esquerdo || lado == LadoRGB.Ambos) {
@@ -418,13 +445,13 @@ namespace RoboBatalha {
                 cor = CorRGB.Verde
                 break
             case TimeLED.Amarelo:
-                cor = CorRGB.Branco // amarelo = vermelho + verde
+                cor = CorRGB.Amarelo
                 break
             case TimeLED.Roxo:
-                cor = CorRGB.Branco // roxo = vermelho + azul (mistura via branco)
+                cor = CorRGB.Roxo
                 break
             case TimeLED.Ciano:
-                cor = CorRGB.Branco // ciano = verde + azul (mistura via branco)
+                cor = CorRGB.Ciano
                 break
             case TimeLED.Branco:
                 cor = CorRGB.Branco
