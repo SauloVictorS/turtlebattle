@@ -202,7 +202,6 @@ namespace RoboBatalha {
      */
     //% block="avançar com velocidade $velocidade \\% por $tempo ms"
     //% velocidade.min=0 velocidade.max=100
-    //% tempo.min=0 tempo.max=5000
     //% group="Movimento tático" weight=95
     export function avancar(velocidade: number, tempo: number) {
         moverBase(DirecaoBase.Frente, velocidade, tempo)
@@ -213,7 +212,6 @@ namespace RoboBatalha {
      */
     //% block="recuar com velocidade $velocidade \\% por $tempo ms"
     //% velocidade.min=0 velocidade.max=100
-    //% tempo.min=0 tempo.max=5000
     //% group="Movimento tático" weight=94
     export function recuar(velocidade: number, tempo: number) {
         moverBase(DirecaoBase.Tras, velocidade, tempo)
