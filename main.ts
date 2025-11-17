@@ -34,7 +34,11 @@ enum CorRGB {
 enum TimeLED {
     Azul = 0,
     Vermelho = 1,
-    Verde = 2
+    Verde = 2,
+    Amarelo = 3,
+    Roxo = 4,
+    Ciano = 5,
+    Branco = 6
 }
 
 // Lado para girar em blocos táticos
@@ -402,9 +406,30 @@ namespace RoboBatalha {
     //% group="Feedback" weight=78
     export function ledDeTime(equipe: TimeLED) {
         let cor = CorRGB.Apagado
-        if (equipe == TimeLED.Azul) cor = CorRGB.Azul
-        if (equipe == TimeLED.Vermelho) cor = CorRGB.Vermelho
-        if (equipe == TimeLED.Verde) cor = CorRGB.Verde
+
+        switch (equipe) {
+            case TimeLED.Azul:
+                cor = CorRGB.Azul
+                break
+            case TimeLED.Vermelho:
+                cor = CorRGB.Vermelho
+                break
+            case TimeLED.Verde:
+                cor = CorRGB.Verde
+                break
+            case TimeLED.Amarelo:
+                cor = CorRGB.Branco // amarelo = vermelho + verde
+                break
+            case TimeLED.Roxo:
+                cor = CorRGB.Branco // roxo = vermelho + azul (mistura via branco)
+                break
+            case TimeLED.Ciano:
+                cor = CorRGB.Branco // ciano = verde + azul (mistura via branco)
+                break
+            case TimeLED.Branco:
+                cor = CorRGB.Branco
+                break
+        }
 
         setRGB(LadoRGB.Ambos, cor)
     }
