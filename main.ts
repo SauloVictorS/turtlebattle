@@ -229,15 +229,14 @@ namespace RoboBatalha {
      */
     //% block="virar para $lado ângulo $angulo ° com velocidade $velocidade \\%"
     //% angulo.min=0 angulo.max=180
-    //% velocidade.min=0 velocidade.max=100
     //% group="Movimento tático" weight=93
-    export function virarComAngulo(lado: LADOVIRAR, angulo: number, velocidade: number) {
+    export function virarComAngulo(lado: LADOVIRAR, angulo: number) {
         // mapeia ângulo para tempo aproximado (ajustável na prática)
         let tempo = Math.map(angulo, 0, 180, 0, 1135)
         if (lado == LADOVIRAR.Esquerda) {
-            moverBase(DirecaoBase.GirarEsquerda, velocidade, tempo)
+            moverBase(DirecaoBase.GirarEsquerda, 50, tempo)
         } else {
-            moverBase(DirecaoBase.GirarDireita, velocidade, tempo)
+            moverBase(DirecaoBase.GirarDireita, 50, tempo)
         }
     }
 
